@@ -35,12 +35,17 @@ export default function NavBar() {
               </div>
               <Link
                 to="/cart"
-                className="position-relative d-flex align-items-center text-decoration-none text-dark"
+                className="position-relative d-flex align-items-center text-decoration-none text-dark ms-lg-3 mt-3 mt-lg-0"
+                style={{ width: "fit-content" }}
               >
-                <FaShoppingCart size={24} />
+                <FaShoppingCart size={28} />
                 <span
                   className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"
-                  style={{ fontSize: "12px" }}
+                  style={{
+                    fontSize: "12px",
+                    minWidth: "18px",
+                    minHeight: "18px",
+                  }}
                 >
                   {cartCount}
                 </span>
