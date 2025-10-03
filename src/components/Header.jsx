@@ -30,11 +30,7 @@ export default function Header() {
       <Carousel data-bs-theme="dark">
         {info.map((slide, index) => (
           <Carousel.Item key={index} style={{ height: "50vh" }}>
-            <CarouselItemCom
-              img={slide.img}
-              title={slide.title}
-              subTitle={slide.subTitle}
-            />
+            <CarouselItemCom slide={slide} />
           </Carousel.Item>
         ))}
       </Carousel>

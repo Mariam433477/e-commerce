@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-export default function CarouselItemCom({ img, title, subTitle }) {
+export default function CarouselItemCom({ slide }) {
+  const { img, title, subTitle } = slide;
   return (
     <>
       <img className="d-block w-100" src={img} alt={title} />
