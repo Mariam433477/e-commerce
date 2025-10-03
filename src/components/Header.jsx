@@ -1,6 +1,6 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-
+import CarouselItemCom from "./CarouselItemCom";
 import img1 from "../assets/photo1.jpg";
 
 import img2 from "../assets/photo2.jpg";
@@ -27,22 +27,14 @@ export default function Header() {
   ];
   return (
     <>
-      <Carousel interval={3000} controls indicators>
-        {info.map((slide, i) => (
-          <Carousel.Item key={i}>
-            <img
-              className="d-block w-100"
-              src={slide.img}
-              alt={slide.title}
-              style={{
-                maxHeight: "400px",
-                objectFit: "cover",
-              }}
+      <Carousel data-bs-theme="dark">
+        {info.map((slide, index) => (
+          <Carousel.Item key={index} style={{ height: "50vh" }}>
+            <CarouselItemCom
+              img={slide.img}
+              title={slide.title}
+              subTitle={slide.subTitle}
             />
-            <Carousel.Caption>
-              <h5>{slide.title}</h5>
-              <p>{slide.subTitle}</p>
-            </Carousel.Caption>
           </Carousel.Item>
         ))}
       </Carousel>
