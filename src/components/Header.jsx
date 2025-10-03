@@ -1,7 +1,8 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import img1 from "../assets/photo1.jpg";
 import CarouselItemCom from "./CarouselItemCom";
+import img1 from "../assets/photo1.jpg";
+
 import img2 from "../assets/photo2.jpg";
 import img3 from "../assets/photo3.jpg";
 
