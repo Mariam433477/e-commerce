@@ -21,7 +21,7 @@ export default function OurProducts() {
   // if (isLoading) return <p>Loading products...</p>;
   // if (errors) return <p>Error: {errors}</p>;
 
-  // فلترة المنتجات حسب الفئة المختارة
+   
   const filteredProducts =
     selectedCategory === "All"
       ? products

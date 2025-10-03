@@ -15,7 +15,7 @@ export default function CardProduct({ id, img, title, subTitle, price }) {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-    dispatch(addToCart({ id, img, title, price }));  
+    dispatch(addToCart({ id, img, title, price }));
   };
   return (
     <>
@@ -50,7 +50,7 @@ export default function CardProduct({ id, img, title, subTitle, price }) {
                 style={{ cursor: "pointer" }}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleAddToCart();
+                  handleAddToCart(e);
                 }}
               />
             </div>

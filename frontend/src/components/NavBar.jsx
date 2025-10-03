@@ -15,7 +15,7 @@ export default function NavBar() {
   const handleLogout = () => {
     dispatch(logout());
   };
-   const cartCount = useSelector((state) => state.cart.totalQuantity);
+const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   return (
     <>
@@ -67,7 +67,7 @@ export default function NavBar() {
                     minHeight: "18px",
                   }}
                 >
-                  {cartCount}
+                  {totalQuantity}
                 </span>
               </Link>
             </Nav>
