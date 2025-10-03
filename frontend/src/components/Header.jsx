@@ -27,7 +27,7 @@ export default function Header() {
   ];
   return (
     <>
-      <Carousel data-bs-theme="dark">
+      <Carousel data-bs-theme="dark" interval={3000} controls indicators>
         {info.map((slide, index) => (
           <Carousel.Item key={index} style={{ height: "50vh" }}>
             <CarouselItemCom slide={slide} />

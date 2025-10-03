@@ -5,9 +5,18 @@ import Navbar from "react-bootstrap/Navbar";
 import { MainButton } from "../custom/MainButton";
 import { Link, NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store/slices/userSlice";
 
 export default function NavBar() {
-  const cartCount = 3;
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userSlice.loggedInUser);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+   const cartCount = useSelector((state) => state.cart.totalQuantity);
+
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -26,12 +35,23 @@ export default function NavBar() {
               </NavLink>
 
               <div className="d-flex flex-column flex-lg-row gap-2 mt-3 mt-lg-0">
-                <Link to="register">
-                  <MainButton>Register</MainButton>
-                </Link>
-                <Link to="login">
-                  <MainButton>Login</MainButton>
-                </Link>
+                {user ? (
+                  <>
+                    <span className="me-2 align-self-center">
+                      Hello, {user.name}
+                    </span>
+                    <MainButton onClick={handleLogout}>Logout</MainButton>
+                  </>
+                ) : (
+                  <>
+                    <Link to="register">
+                      <MainButton>Register</MainButton>
+                    </Link>
+                    <Link to="login">
+                      <MainButton>Login</MainButton>
+                    </Link>
+                  </>
+                )}
               </div>
               <Link
                 to="/cart"
