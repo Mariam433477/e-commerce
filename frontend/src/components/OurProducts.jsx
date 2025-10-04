@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardProduct from "./CardProduct";
-// import img1 from "../assets/photo1.jpg";
-// import img2 from "../assets/photo2.jpg";
-// import img3 from "../assets/photo3.jpg";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Pagination } from "react-bootstrap";
 import ButtonsCategory from "./ButtonsCategory";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProductAction } from "../store/slices/productSlice";
@@ -13,102 +10,51 @@ export default function OurProducts() {
   const { products = [] } = useSelector((state) => state.productSlice);
 
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 8;
 
   useEffect(() => {
     dispatch(getAllProductAction());
   }, [dispatch]);
 
-  // if (isLoading) return <p>Loading products...</p>;
-  // if (errors) return <p>Error: {errors}</p>;
-
-   
+  // فلترة المنتجات حسب التصنيف
   const filteredProducts =
     selectedCategory === "All"
       ? products
       : products.filter((p) => p.category === selectedCategory);
 
-  //   const info =[
-  //   {
-  //     id: 1,
-  //     img: img1,
-  //     title: "First slide label",
-  //     subTitle: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
-  //     price: 120,
-  //   },
-  //   {
-  //     id: 2,
-  //     img: img2,
-  //     title: "Second slide label",
-  //     subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //     price: 90,
-  //   },
-  //   {
-  //     id: 3,
-  //     img: img3,
-  //     title: "Third slide label",
-  //     subTitle:
-  //       "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
-  //     price: 150,
-  //   },
-  //   {
-  //     id: 4,
-  //     img: img1,
-  //     title: "First slide label",
-  //     subTitle: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
-  //     price: 200,
-  //   },
-  //   {
-  //     id: 5,
-  //     img: img2,
-  //     title: "Second slide label",
-  //     subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //     price: 75,
-  //   },
-  //   {
-  //     id: 6,
-  //     img: img3,
-  //     title: "Third slide label",
-  //     subTitle:
-  //       "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
-  //     price: 130,
-  //   },
-  //   {
-  //     id: 7,
-  //     img: img1,
-  //     title: "First slide label",
-  //     subTitle: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
-  //     price: 220,
-  //   },
-  //   {
-  //     id: 8,
-  //     img: img2,
-  //     title: "Second slide label",
-  //     subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //     price: 85,
-  //   },
-  //   {
-  //     id: 9,
-  //     img: img3,
-  //     title: "Third slide label",
-  //     subTitle:
-  //       "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
-  //     price: 160,
-  //   },
-  // ];
+  // تقسيم الصفحات
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    startIndex,
+    startIndex + productsPerPage
+  );
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <Container className="my-5">
-      <h2 className="text-center mb-4">Our Products</h2>
+      <h2 className="text-center mb-4 fw-bold">Our Products</h2>
+
+      {/* أزرار التصنيفات */}
       <ButtonsCategory
         selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
+        onSelectCategory={(category) => {
+          setSelectedCategory(category);
+          setCurrentPage(1);
+        }}
       />
 
+      {/* عرض المنتجات */}
       <Row className="g-4 justify-content-center">
-        {Array.isArray(filteredProducts) &&
-          filteredProducts.map((item, index) => (
+        {Array.isArray(currentProducts) && currentProducts.length > 0 ? (
+          currentProducts.map((item) => (
             <Col
-              key={index}
+              key={item.id}
               xs={12}
               sm={6}
               md={4}
@@ -116,15 +62,46 @@ export default function OurProducts() {
               className="d-flex justify-content-center"
             >
               <CardProduct
-                id={index + 1}
+                id={item.id}
                 img={item.thumbnail}
                 title={item.title}
                 subTitle={item.description}
                 price={item.price}
+                stock={item.stock} // ✅ أضفناها هنا
               />
             </Col>
-          ))}
+          ))
+        ) : (
+          <h5 className="text-center text-muted mt-4">
+            No products found in this category
+          </h5>
+        )}
       </Row>
+
+      {/* التصفح بين الصفحات */}
+      {totalPages > 1 && (
+        <div className="d-flex justify-content-center mt-4">
+          <Pagination>
+            <Pagination.Prev
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)}
+            />
+            {Array.from({ length: totalPages }, (_, i) => (
+              <Pagination.Item
+                key={i + 1}
+                active={i + 1 === currentPage}
+                onClick={() => handlePageChange(i + 1)}
+              >
+                {i + 1}
+              </Pagination.Item>
+            ))}
+            <Pagination.Next
+              disabled={currentPage === totalPages}
+              onClick={() => handlePageChange(currentPage + 1)}
+            />
+          </Pagination>
+        </div>
+      )}
     </Container>
   );
 }

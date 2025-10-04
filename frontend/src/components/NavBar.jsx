@@ -21,7 +21,7 @@ export default function NavBar() {
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand as={Link} to="/home">
             E-Commerce
           </Navbar.Brand>
 
@@ -29,10 +29,10 @@ export default function NavBar() {
 
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto align-items-lg-center gap-3">
-              <NavLink to="/" className="nav-link">
+              <NavLink to="/home" className="nav-link">
                 Home
               </NavLink>
-              <NavLink to="/cart" className="nav-link">
+              <NavLink to="/home/cart" className="nav-link">
                 Cart
               </NavLink>
 
@@ -56,7 +56,7 @@ export default function NavBar() {
                 )}
               </div>
               <Link
-                to="/cart"
+                to="/home/cart"
                 className="position-relative d-flex align-items-center text-decoration-none text-dark ms-lg-3 mt-3 mt-lg-0"
                 style={{ width: "fit-content" }}
               >

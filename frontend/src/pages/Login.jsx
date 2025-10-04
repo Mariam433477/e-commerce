@@ -12,7 +12,9 @@ export default function Login() {
   const handleLogin = (formData) => {
     dispatch(loginUser({ email: formData.email, password: formData.password }))
       .unwrap()
-      .then(() => {
+      .then((user) => {
+         localStorage.setItem("loggedInUser", JSON.stringify(user));
+
         Swal.fire({
           title: "Welcome!",
           text: "Login successful!",

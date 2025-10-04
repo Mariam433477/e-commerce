@@ -97,7 +97,7 @@ export default function DetailsProductSection() {
           price: product.price,
         })
       );
-      navigate("/cart");
+      navigate("/home/cart");
     }
   };
 
