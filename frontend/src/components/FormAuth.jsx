@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { MainButton } from "../custom/MainButton";
+import { Link } from "react-router-dom";
+
 export default function FormAuth({ title, fields, onSubmit, buttonText }) {
   const [formData, setFormData] = useState(
     fields.reduce((acc, field) => ({ ...acc, [field.name]: "" }), {})
@@ -52,42 +53,57 @@ export default function FormAuth({ title, fields, onSubmit, buttonText }) {
   };
 
   const getInputClass = (field) => {
-    if (errors[field] && touched[field]) return "form-control is-invalid";
-    if (!errors[field] && touched[field]) return "form-control is-valid";
-    return "form-control";
+    if (errors[field] && touched[field]) return "is-invalid";
+    if (!errors[field] && touched[field]) return "is-valid";
+    return "";
   };
+
   return (
-    <>
-      <Card className="mx-auto mt-5" style={{ maxWidth: "400px" }}>
-        <Card.Body>
-          <h2 className="text-center mb-4">{title}</h2>
-          <Form onSubmit={handleSubmit}>
-            {fields.map((field) => (
-              <Form.Group key={field.name} className="mb-3">
-                <Form.Label>{field.label}</Form.Label>
-                <Form.Control
-                  type={field.type}
-                  name={field.name}
-                  className={getInputClass(field.name)}
-                  value={formData[field.name]}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  required
-                />
-              </Form.Group>
-            ))}
-            <MainButton
-              variant="primary"
-              type="submit"
-              className="w-100
-          "
-            >
-              {" "}
-              {buttonText}
-            </MainButton>
-          </Form>
-        </Card.Body>
-      </Card>
-    </>
+    <Card className="mx-auto mt-5" style={{ maxWidth: "400px" }}>
+      <Card.Body>
+        <h2 className="text-center mb-4">{title}</h2>
+        <Form noValidate onSubmit={handleSubmit}>
+          {fields.map((field) => (
+            <Form.Group key={field.name} className="mb-3">
+              <Form.Label>{field.label}</Form.Label>
+              <Form.Control
+                type={field.type}
+                name={field.name}
+                value={formData[field.name]}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={getInputClass(field.name)}
+                required
+              />
+              {errors[field.name] && touched[field.name] && (
+                <Form.Control.Feedback type="invalid" className="d-block">
+                  {errors[field.name]}
+                </Form.Control.Feedback>
+              )}
+            </Form.Group>
+          ))}
+          <MainButton type="submit" className="w-100">
+            {buttonText}
+          </MainButton>
+        </Form>
+
+        {/* النص أسفل الفورم */}
+        {title === "Login" ? (
+          <p className="mt-3 text-center">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-primary">
+              Register
+            </Link>
+          </p>
+        ) : (
+          <p className="mt-3 text-center">
+            Already have an account?{" "}
+            <Link to="/login" className="text-primary">
+              Login
+            </Link>
+          </p>
+        )}
+      </Card.Body>
+    </Card>
   );
 }

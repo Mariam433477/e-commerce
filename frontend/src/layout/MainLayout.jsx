@@ -8,21 +8,30 @@ import NotFound from "../pages/NotFound";
 import ProductDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
 import BuyNowSuccess from "../pages/BuyNowSuccess";
+import ProtectedRoute from "./ProtectedRoute";
 
 export default function MainLayout() {
   return (
     <>
-     
       <BrowserRouter>
         <Routes>
-          <Route path="" element={<SharedLayout />}>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <SharedLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Home />} />
             <Route path="product/:id" element={<ProductDetails />} />
             <Route path="cart" element={<Cart />} />
             <Route path="buy" element={<BuyNowSuccess />} />
           </Route>
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

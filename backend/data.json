@@ -1,13 +1,13 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Mariam",
       "email": "mariam@example.com",
       "password": "123456"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Mohamed",
       "email": "mohamed@example.com",
       "password": "abcdef"
@@ -23,25 +23,49 @@
       "name": "sfdf",
       "email": "sdfs@csf",
       "password": "sssssssss"
+    },
+    {
+      "id": "93ae",
+      "name": "mmm",
+      "email": "mm@mm",
+      "password": "123456"
+    },
+    {
+      "id": "58a1",
+      "name": "mm",
+      "email": "mm@m",
+      "password": "123456"
+    },
+    {
+      "id": "fe1c",
+      "name": "n",
+      "email": "n@",
+      "password": "1234567"
+    },
+    {
+      "id": "da26",
+      "name": "k",
+      "email": "k@",
+      "password": "1234567"
     }
   ],
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Laptop",
       "price": 1500,
       "categoryId": 1,
       "img": "/images/laptop.jpg"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Phone",
       "price": 800,
       "categoryId": 2,
       "img": "/images/phone.jpg"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Headphones",
       "price": 150,
       "categoryId": 3,
@@ -50,33 +74,33 @@
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Electronics"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Mobile"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Accessories"
     }
   ],
   "carousel": [
     {
-      "id": 1,
+      "id": "1",
       "img": "/images/photo1.jpg",
       "title": "First Slide",
       "subTitle": "Welcome to our store!"
     },
     {
-      "id": 2,
+      "id": "2",
       "img": "/images/photo2.jpg",
       "title": "Second Slide",
       "subTitle": "Check out our new products."
     },
     {
-      "id": 3,
+      "id": "3",
       "img": "/images/photo3.jpg",
       "title": "Third Slide",
       "subTitle": "Best deals just for you."

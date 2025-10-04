@@ -15,13 +15,15 @@ export default function NavBar() {
   const handleLogout = () => {
     dispatch(logout());
   };
-const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="#home">E-Commerce</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">
+            E-Commerce
+          </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 

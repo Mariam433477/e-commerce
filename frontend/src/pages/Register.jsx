@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AuthForm from "../components/FormAuth";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { fetchUsers, registerUser } from "../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,9 +15,13 @@ export default function Register() {
   }, [dispatch]);
 
   const handleRegister = (formData) => {
-     
     if (users.find((u) => u.email === formData.email)) {
-      alert("Email already exists");
+      Swal.fire({
+        title: "Oops!",
+        text: "Email already exists, try another one.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
       return;
     }
 
@@ -28,27 +33,31 @@ export default function Register() {
       })
     );
 
-    alert("Registered successfully!");
-    navigate("/login");  
+    Swal.fire({
+      title: "Success!",
+      text: "Registered successfully!",
+      icon: "success",
+      confirmButtonText: "Go to Login",
+    }).then(() => {
+      navigate("/"); 
+    });
   };
 
   return (
-    <>
-      <AuthForm
-        title="Register"
-        buttonText="Sign Up"
-        onSubmit={handleRegister}
-        fields={[
-          { name: "username", label: "Username", type: "text" },
-          { name: "email", label: "Email", type: "email" },
-          { name: "password", label: "Password", type: "password" },
-          {
-            name: "confirm password",
-            label: "confirm Password",
-            type: "password",
-          },
-        ]}
-      />
-    </>
+    <AuthForm
+      title="Register"
+      buttonText="Sign Up"
+      onSubmit={handleRegister}
+      fields={[
+        { name: "username", label: "Username", type: "text" },
+        { name: "email", label: "Email", type: "email" },
+        { name: "password", label: "Password", type: "password" },
+        {
+          name: "confirm password",
+          label: "Confirm Password",
+          type: "password",
+        },
+      ]}
+    />
   );
 }
