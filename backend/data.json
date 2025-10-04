@@ -55,59 +55,22 @@
       "password": "123456"
     }
   ],
-  "products": [
-    {
-      "id": "1",
-      "title": "Laptop",
-      "price": 1500,
-      "categoryId": 1,
-      "img": "/images/laptop.jpg"
-    },
-    {
-      "id": "2",
-      "title": "Phone",
-      "price": 800,
-      "categoryId": 2,
-      "img": "/images/phone.jpg"
-    },
-    {
-      "id": "3",
-      "title": "Headphones",
-      "price": 150,
-      "categoryId": 3,
-      "img": "/images/headphones.jpg"
-    }
-  ],
-  "categories": [
-    {
-      "id": "1",
-      "name": "Electronics"
-    },
-    {
-      "id": "2",
-      "name": "Mobile"
-    },
-    {
-      "id": "3",
-      "name": "Accessories"
-    }
-  ],
   "carousel": [
     {
       "id": "1",
-      "img": "/images/photo1.jpg",
+      "img": "https://res.cloudinary.com/dosr8yjca/image/upload/v1759612293/photo1_q25wl4.jpg",
       "title": "First Slide",
       "subTitle": "Welcome to our store!"
     },
     {
       "id": "2",
-      "img": "/images/photo2.jpg",
+      "img": "https://res.cloudinary.com/dosr8yjca/image/upload/v1759612286/photo2_zigr2p.jpg",
       "title": "Second Slide",
       "subTitle": "Check out our new products."
     },
     {
       "id": "3",
-      "img": "/images/photo3.jpg",
+      "img": "https://res.cloudinary.com/dosr8yjca/image/upload/v1759612290/photo3_mt33gr.jpg",
       "title": "Third Slide",
       "subTitle": "Best deals just for you."
     }

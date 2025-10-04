@@ -6,74 +6,7 @@ import { getProductByIdAction } from "../store/slices/productSlice";
 import { addToCart } from "../store/slices/cartSlice";
 
 export default function DetailsProductSection() {
-  // const products = [
-  //   {
-  //     id: 1,
-  //     img: img1,
-  //     title: "First slide label",
-  //     subTitle: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
-  //     price: 120,
-  //   },
-  //   {
-  //     id: 2,
-  //     img: img2,
-  //     title: "Second slide label",
-  //     subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //     price: 90,
-  //   },
-  //   {
-  //     id: 3,
-  //     img: img3,
-  //     title: "Third slide label",
-  //     subTitle:
-  //       "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
-  //     price: 150,
-  //   },
-  //   {
-  //     id: 4,
-  //     img: img1,
-  //     title: "First slide label",
-  //     subTitle: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
-  //     price: 200,
-  //   },
-  //   {
-  //     id: 5,
-  //     img: img2,
-  //     title: "Second slide label",
-  //     subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //     price: 75,
-  //   },
-  //   {
-  //     id: 6,
-  //     img: img3,
-  //     title: "Third slide label",
-  //     subTitle:
-  //       "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
-  //     price: 130,
-  //   },
-  //   {
-  //     id: 7,
-  //     img: img1,
-  //     title: "First slide label",
-  //     subTitle: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
-  //     price: 220,
-  //   },
-  //   {
-  //     id: 8,
-  //     img: img2,
-  //     title: "Second slide label",
-  //     subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //     price: 85,
-  //   },
-  //   {
-  //     id: 9,
-  //     img: img3,
-  //     title: "Third slide label",
-  //     subTitle:
-  //       "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
-  //     price: 160,
-  //   },
-  // ];
+   
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

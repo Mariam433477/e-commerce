@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 
-// 🧩 استرجاع البيانات من localStorage عند تحميل الصفحة
+ 
 const savedItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 const savedTotalQuantity =
   JSON.parse(localStorage.getItem("cartTotalQuantity")) || 0;
@@ -12,8 +12,7 @@ const initialState = {
   totalQuantity: savedTotalQuantity,
   totalPrice: savedTotalPrice,
 };
-
-// حفظ الحالة في localStorage
+ 
 const saveToLocalStorage = (state) => {
   localStorage.setItem("cartItems", JSON.stringify(state.items));
   localStorage.setItem(

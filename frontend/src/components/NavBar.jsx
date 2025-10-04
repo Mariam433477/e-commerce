@@ -35,6 +35,9 @@ export default function NavBar() {
               <NavLink to="/home/cart" className="nav-link">
                 Cart
               </NavLink>
+              <NavLink to="/home/fav" className="nav-link">
+                Favorite
+              </NavLink>
 
               <div className="d-flex flex-column flex-lg-row gap-2 mt-3 mt-lg-0">
                 {user ? (

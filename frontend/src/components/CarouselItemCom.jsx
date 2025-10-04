@@ -8,7 +8,7 @@ export default function CarouselItemCom({ slide }) {
         className="d-block w-100"
         src={img}
         alt={title}
-        style={{ height: "90vh", objectFit: "cover" }}
+        style={{ height: "60vh", objectFit: "cover" }}
       />
       <Carousel.Caption>
         <h5>{title}</h5>

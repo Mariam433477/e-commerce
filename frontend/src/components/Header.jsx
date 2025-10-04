@@ -1,39 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCarousel } from "../store/slices/carouselSlice";
 import CarouselItemCom from "./CarouselItemCom";
-import img1 from "../assets/photo1.jpg";
-
-import img2 from "../assets/photo2.jpg";
-import img3 from "../assets/photo3.jpg";
 
 export default function Header() {
-  const info = [
-    {
-      img: img1,
-      title: "First slide label",
-      subTitle: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
-    },
-    {
-      img: img2,
-      title: "Second slide label",
-      subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    },
-    {
-      img: img3,
-      title: "Third slide label",
-      subTitle:
-        "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
-    },
-  ];
+  const dispatch = useDispatch();
+  const { slides } = useSelector((state) => state.carousel);
+
+  useEffect(() => {
+    dispatch(fetchCarousel());
+  }, [dispatch]);
+
   return (
-    <>
-      <Carousel data-bs-theme="dark" interval={3000} controls indicators>
-        {info.map((slide, index) => (
-          <Carousel.Item key={index} style={{ height: "50vh" }}>
-            <CarouselItemCom slide={slide} />
-          </Carousel.Item>
-        ))}
-      </Carousel>
-    </>
+    <Carousel interval={3000} controls indicators>
+      {slides.map((slide) => (
+        <Carousel.Item key={slide.id}>
+          <CarouselItemCom slide={slide} />
+        </Carousel.Item>
+      ))}
+    </Carousel>
   );
 }

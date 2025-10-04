@@ -9,6 +9,7 @@ import ProductDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
 import BuyNowSuccess from "../pages/BuyNowSuccess";
 import ProtectedRoute from "./ProtectedRoute";
+import Favorites from "../pages/Favorites";
 
 export default function MainLayout() {
   return (
@@ -30,6 +31,7 @@ export default function MainLayout() {
             <Route path="product/:id" element={<ProductDetails />} />
             <Route path="cart" element={<Cart />} />
             <Route path="buy" element={<BuyNowSuccess />} />
+            <Route path="fav" element={<Favorites />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

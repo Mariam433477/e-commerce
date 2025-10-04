@@ -2,10 +2,11 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import { FaEye } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
-import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/slices/cartSlice";
+import { toggleFavorite } from "../store/slices/favSlice";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
@@ -21,14 +22,15 @@ export default function CardProduct({
 }) {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items) || [];
+  const favorites = useSelector((state) => state.favorites) || [];
 
-  // الكمية الحالية للمنتج في السلة
   const itemInCart = cartItems.find((item) => item.id === id);
   const qtyInCart = itemInCart ? itemInCart.qty : 0;
 
-  const handleAddToCart = (e) => {
-    e.preventDefault();
+  const isFavorite = favorites.some((item) => item?.id === id);
 
+  // إضافة للسلة
+  const handleAddToCart = () => {
     if (qtyInCart < stock) {
       dispatch(addToCart({ id, img, title, price, stock }));
       MySwal.fire({
@@ -44,7 +46,7 @@ export default function CardProduct({
       MySwal.fire({
         icon: "error",
         title: "عذراً!",
-        text: "وصلت للحد الأقصى من المخزون 😢",
+        text: "وصلت للحد الأقصى من المخزون",
         confirmButtonText: "حسناً",
       });
     }
@@ -66,19 +68,23 @@ export default function CardProduct({
         e.currentTarget.style.boxShadow = "none";
       }}
     >
-      {/* أيقونة المفضلة */}
-      <div
+       <div
+        onClick={(e) => {
+          e.stopPropagation();
+          dispatch(toggleFavorite({ id, img, title, subTitle, price, stock }));
+        }}
         style={{
           position: "absolute",
           top: "10px",
           right: "10px",
           cursor: "pointer",
-          color: "#999",
+          color: isFavorite ? "red" : "#999",
           fontSize: "1.5rem",
-          zIndex: 2,
+          zIndex: 10,
+          userSelect: "none",
         }}
       >
-        <MdFavoriteBorder />
+        {isFavorite ? <MdFavorite /> : <MdFavoriteBorder />}
       </div>
 
       {/* الصورة */}
@@ -118,7 +124,6 @@ export default function CardProduct({
             {subTitle}
           </Card.Text>
 
-          {/* معلومات المخزون */}
           <div className="mt-2">
             {stock > 0 ? (
               <span className="badge bg-success">
@@ -137,12 +142,9 @@ export default function CardProduct({
               <FaEye
                 size={22}
                 style={{ cursor: "pointer", transition: "color 0.2s" }}
-                onMouseEnter={(e) => (e.target.style.color = "#198754")}
-                onMouseLeave={(e) => (e.target.style.color = "inherit")}
               />
             </Link>
 
-            {/* زر الإضافة */}
             <IoMdAdd
               size={26}
               style={{
@@ -150,26 +152,10 @@ export default function CardProduct({
                 opacity: qtyInCart < stock ? 1 : 0.5,
               }}
               onClick={handleAddToCart}
-              onMouseEnter={(e) => {
-                if (qtyInCart < stock) e.target.style.color = "#198754";
-              }}
-              onMouseLeave={(e) => (e.target.style.color = "inherit")}
             />
           </div>
         </div>
       </Card.Body>
-
-      {/* التعديلات على الـ responsive */}
-      <style>{`
-        @media (max-width: 768px) {
-          .product-card { margin-bottom: 1rem; }
-          .product-card img { height: 180px !important; }
-        }
-        @media (max-width: 576px) {
-          .product-card { margin-bottom: 1rem; }
-          .product-card .fs-5 { font-size: 1rem !important; }
-        }
-      `}</style>
     </Card>
   );
 }
