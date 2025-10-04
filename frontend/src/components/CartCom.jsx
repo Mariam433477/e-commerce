@@ -38,30 +38,29 @@ export default function CartCom() {
                 <h5 className="mb-1">{item.title}</h5>
                 <p className="mb-1 text-muted">Price: ${item.price}</p>
                 <div className="d-flex align-items-center gap-2">
-                  <button
+                  <MainButton
                     className="btn btn-outline-secondary btn-sm"
                     onClick={() => dispatch(decrementQty(item.id))}
                   >
                     <FaMinus />
-                  </button>
+                  </MainButton>
                   <span>{item.qty}</span>
-                  <button
+                  <MainButton
                     className="btn btn-outline-secondary btn-sm"
                     onClick={() => dispatch(incrementQty(item.id))}
                   >
                     <FaPlus />
-                  </button>
+                  </MainButton>
                 </div>
               </div>
             </div>
             <div className="d-flex flex-column align-items-end">
               <h5 className="mb-2">${item.price * item.qty}</h5>
-              <button
-                className="btn btn-outline-danger btn-sm"
+              <MainButton
                 onClick={() => dispatch(removeFromCart(item.id))}
               >
                 <FaTrash />
-              </button>
+              </MainButton>
             </div>
           </div>
         ))}
